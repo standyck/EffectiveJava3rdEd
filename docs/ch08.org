@@ -1,5 +1,6 @@
 *  Chapter 8 Notes
 **  Item 49: Check parameters for validity
+hello
    - Find errors as soon as possible after they occur. i.e. check method parameters at the
      beginning of the method body.
    * Document your assertions with =throws= clauses, but don't bother if the classes you're
@@ -84,6 +85,7 @@
                System.out.println("\tSet: " + set);
                System.out.println("\tList: " + list);
                System.out.println("\tList2: " + list2);
+               System.out.println("hello");
 
                for(int i = 0; i < 3; i++) {
                    set.remove(i);
@@ -103,10 +105,12 @@
      : 	Set: [-3, -2, -1, 0, 1, 2]
      : 	List: [-3, -2, -1, 0, 1, 2]
      : 	List2: [-3, -2, -1, 0, 1, 2]
+     : hello
      : After:
      : 	Set: [-3, -2, -1]
      : 	List: [-2, 0, 2]
      : 	List2: [-3, -2, -1]
+
 
      Wha??? It turns out the =set.remove()= removes each =Integer= while =list.remove()= method
      removes position =int=. The zeroth element (=-3=), then the element at position 1 which
