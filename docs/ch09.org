@@ -1,0 +1,88 @@
+* Chapter 9 Notes
+** Item 57: Minimize the scope of local variables
+** Item 58: Prefer for-each loops to traditional =for= loops
+   #+HEADERS: :classname Dice
+   #+BEGIN_SRC java :tangle ../src/main/java/ch09/Dice.java :results output :exports both
+     import java.util.Collection;
+     import java.util.Iterator;
+     import java.util.EnumSet;
+
+     class Dice {
+         //Let's to a d4
+         enum Face { ONE, TWO, THREE, FOUR }
+
+         public static void bad() {
+             Collection<Face> faces = EnumSet.allOf(Face.class);
+
+             for(Iterator<Face> i = faces.iterator(); i.hasNext();) {
+                 for(Iterator<Face> j = faces.iterator(); j.hasNext();) {
+                     System.out.println("\t" + i.next() + " " + j.next());
+                 }
+             }
+         }
+
+         public static void good() {
+             Collection<Face> faces = EnumSet.allOf(Face.class);
+
+             for(Face d1 : faces) {
+                 for(Face d2 : faces) {
+                     System.out.println("\t" + d1 + " " + d2);
+                 }
+             }
+         }
+
+         public static void main (String[] args) {
+             System.out.println("bad:");
+             bad();
+
+             System.out.println("better:");
+             good();
+         }
+     }
+   #+END_SRC
+
+   #+RESULTS:
+   #+begin_example
+   bad:
+       ONE ONE
+       TWO TWO
+       THREE THREE
+       FOUR FOUR
+   better:
+       ONE ONE
+       ONE TWO
+       ONE THREE
+       ONE FOUR
+       TWO ONE
+       TWO TWO
+       TWO THREE
+       TWO FOUR
+       THREE ONE
+       THREE TWO
+       THREE THREE
+       THREE FOUR
+       FOUR ONE
+       FOUR TWO
+       FOUR THREE
+       FOUR FOUR
+   #+end_example
+** Item 59: Know and use the libraries
+
+   #+HEADERS: :classname Rng
+   #+BEGIN_SRC java :tangle ../src/main/java/ch09/Rng.java :results output :exports both
+     class Rng {
+
+         public static void main(String[] args) {
+             int n = 2 * (Integer.MAX_VALUE / 3);
+             int low = 0;
+             for (int i = 0; i < 1000000; i++) {
+                 if(Math.random(n) < n/2) {
+                     low++;
+                 }
+             }
+             System.out.println("low: " + low);
+         }
+     }
+   #+END_SRC
+
+   #+RESULTS:

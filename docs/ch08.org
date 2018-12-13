@@ -1,6 +1,5 @@
 *  Chapter 8 Notes
 **  Item 49: Check parameters for validity
-hello
    - Find errors as soon as possible after they occur. i.e. check method parameters at the
      beginning of the method body.
    * Document your assertions with =throws= clauses, but don't bother if the classes you're
